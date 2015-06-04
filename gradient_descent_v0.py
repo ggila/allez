@@ -1,43 +1,56 @@
 import numpy as np
+from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
-hours, pauses, result = [], [], []
+hours, pauses, results = [], [], []
 
 # Get data
 with open('./data.txt', 'r') as f:
     for line in f:
         value = line.split()
-        for i, l in enumerate([hours, pauses, result]):
+        for i, l in enumerate([hours, pauses, results]):
             l.append(int(value[i]))
 
-for l in [hours, pauses, result]:
+for l in [hours, pauses, results]:
     l = np.asarray(l, dtype=float)
 
 # initialize figure
 fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+#fig = plt.figure(figsize=plt.figaspect(2.))
 
 # Add data to figure
-X, Y, Z = hours, pauses, result
-ax.scatter(X, Y, Z, c='r', marker='o')
+H, P, Z = hours, pauses, results
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(H, P, Z, c='r', marker='o')
+ax.plot_surface(H, P, Z)
 
 # We want a function F which, given x hours of work and y number of pauses as inputs, outputs an estimate grade
 # - first try :
-#       F(h, p) = w0 + w1 * h + w2 * p
-#       F(X) = t(W) * X
-
-#       where :      W = | w0 |      X = | 1 |
-#                        | w1 |          | h |
-#                        | w2 |          | p |
+#       F(h, p) = wh * h + wp * p
 
 # Cost Function
-#   (mesure difference beetwen F output and given datas)
-#   J(X) = 
-#   J(w0, w1, w2) = 1 / 2m * sum((F(Xi) - Yi) ^ 2, i, 0, m)
+#   J(wh, wp) = 1 / 2m * sum(((wh * hi + wp * pi - yi) ^ 2, i, 0, m - 1)
 #   where m is the number of given data, Xi/Yi the input/output of i-th data
 
-# We calculate the weight of F (i.e w0, w1, w2) by finding the minimum of the error
+WH = np.arange(-5, 5, 0.25)
+WP = np.arange(-5, 5, 0.25)
+WH, WP = np.meshgrid(WH, WP)
+
+m = len(hours)
+
+Z = np.zeros(np.shape(WP))
+for i in range(m):
+    Z += 1. / (2 * m) * (WH * hours[i] + WP * pauses[i] - results[i])**2
+
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(WH, WP, Z, rstride=4, cstride=4, cmap=cm.coolwarm)
+
+# We calculate the weight of F (i.e wh, wp) by finding the minimum of the error. We find minimum of J by gradient descent :
+# We repeateadly update weight :
+# wj = wj - alpha * dJ(W)/d(wj)  for every j in [0, m-1]
+# where alpha is the learning step
+# wj = wj - alpha / m * sum(())
 
 # Display figure
 ax.set_xlabel('hours')
