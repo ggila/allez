@@ -16,8 +16,7 @@ for l in [hours, pauses, results]:
     l = np.asarray(l, dtype=float)
 
 # initialize figure
-fig = plt.figure()
-#fig = plt.figure(figsize=plt.figaspect(2.))
+fig = plt.figure(figsize=plt.figaspect(0.5))
 
 # Add data to figure
 H, P, Z = hours, pauses, results
@@ -40,8 +39,8 @@ ax2.set_title('Cost function')
 
 m = len(hours)
 
-WP_init = 5 * np.random.rand()
-WH_init = 5 * np.random.rand()
+WP_init = 10 * np.random.rand(6) - 5
+WH_init = 10 * np.random.rand(6) - 5
 Z_init = 0
 for i in range(m):
     Z_init += 1. / (2 * m) * (WH_init * hours[i] + WP_init * pauses[i] - results[i])**2
@@ -56,7 +55,7 @@ Z = np.zeros(np.shape(WP))
 for i in range(m):
     Z += 1. / (2 * m) * (WH * hours[i] + WP * pauses[i] - results[i])**2
 
-ax2.plot_surface(WH, WP, Z, rstride=4, cstride=4, cmap=cm.coolwarm)
+ax2.plot_surface(WH, WP, Z, rstride=4, cstride=4, cmap=cm.coolwarm, alpha=0.1)
 
 print WP_init, WH_init, Z_init
 
