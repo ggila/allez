@@ -37,5 +37,15 @@ for number, position in enumerate([422, 424, 426, 428]):
     second['ax{0}1'.format(number)].set_zlabel('diff')
     second['ax{0}1'.format(number)].plot_surface(Wx, Wy, Z, rstride=4, cstride=4, cmap=cm.coolwarm)
 
+# We want a function F which, given x hours of work and y number of pauses as inputs, outputs an estimate grade
+# - first try :
+#       F(h, p) = wh * h + wp * p
 
+# Cost Function
+#   J(wh, wp) = 1 / 2m * sum(((wh * hi + wp * pi - yi) ^ 2, i, 0, m - 1)
+#   where m is the number of given data, Xi/Yi the input/output of i-th data
+
+# Plot cost function on subplot 2
+
+# Display figure
 plt.show()
