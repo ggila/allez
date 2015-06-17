@@ -4,6 +4,30 @@ from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
+# cost_func
+def J(Wx, Wy):
+    return sum(1./ (2 * data_len)\
+            * (Wx * data[:,0] + Wy * data[:,1] - data[:,2])**2)
+v_J = np.vectorize(J)
+
+# dJ/dWi
+def dJdx(Wx, Wy):
+    return 1./data_len\
+            * sum((Wx * data[:,0] + Wy * data[:,1] - data[:,2]) * data[:,1])
+def dJdy(Wx, Wy):
+    return 1./data_len\
+            * sum((Wx * data[:,0] + Wy * data[:,1] - data[:,2]) * data[:,2])
+
+# gradient_descent
+def gradient_descent(Wlist):
+    for i in range(n_iter):
+        a, b = Wlist[i]
+        a = a - alpha * dJdx(a, b)
+        b = b - alpha * dJdy(a, b)
+        Wlist.append([a, b])
+    return Wlist
+
+
 # Get data
 cwd = os.path.dirname(os.path.realpath(__file__)) 
 data = np.loadtxt(cwd + '/data.txt', delimiter=' ')
@@ -24,10 +48,8 @@ for elem in first:
 Wx = np.arange(-5, 5, 0.25)
 Wy = np.arange(-5, 5, 0.25)
 Wx, Wy = np.meshgrid(Wx, Wy)
-
 Z = np.zeros(np.shape(Wx))
-for i in range(data_len):
-    Z += 1. / (2 * data_len) * (Wx * data[i,0] + Wy * data[i,1] - data[i,2])**2
+Z = v_J(Wx, Wy)
 
 second = {}
 for number, position in enumerate([422, 424, 426, 428]):
@@ -37,15 +59,11 @@ for number, position in enumerate([422, 424, 426, 428]):
     second['ax{0}1'.format(number)].set_zlabel('diff')
     second['ax{0}1'.format(number)].plot_surface(Wx, Wy, Z, rstride=4, cstride=4, cmap=cm.coolwarm)
 
-# We want a function F which, given x hours of work and y number of pauses as inputs, outputs an estimate grade
-# - first try :
-#       F(h, p) = wh * h + wp * p
-
-# Cost Function
-#   J(wh, wp) = 1 / 2m * sum(((wh * hi + wp * pi - yi) ^ 2, i, 0, m - 1)
-#   where m is the number of given data, Xi/Yi the input/output of i-th data
-
-# Plot cost function on subplot 2
-
+Wlist = []
+n_iter = 1000
+alpha = 0.01
+Wlist.append(10 * np.random.rand(2) - 5)
+Wlist = gradient_descent(Wlist)
+ 
 # Display figure
 plt.show()
