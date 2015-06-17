@@ -9,43 +9,88 @@ cwd = os.path.dirname(os.path.realpath(__file__))
 data = np.loadtxt(cwd + '/data.txt', delimiter=' ')
 data_len = np.shape(data)[0]
 
-# initialize figure
-fig = plt.figure(figsize=((11,15)))
+# cost_func
+def J(Wx, Wy):
+    return sum(1./ (2 * data_len)\
+            * (Wx * data[:,0] + Wy * data[:,1] - data[:,2])**2)
+v_J = np.vectorize(J)
 
-first = {}
-for number, position in enumerate([421, 423, 425, 427]):
-    first['ax{0}0'.format(number)] = fig.add_subplot(position, projection='3d')
-for elem in first:
-    first[elem].set_xlabel('x')
-    first[elem].set_ylabel('y')
-    first[elem].set_zlabel('z')
-    first[elem].scatter(data[:,0], data[:,1], data[:,2], c='r', marker='o')
+# dJ/dWi
+def dJdx(Wx, Wy):
+    return 1./data_len\
+            * sum((Wx * data[:,0] + Wy * data[:,1] - data[:,2]) * data[:,0])
+def dJdy(Wx, Wy):
+    return 1./data_len\
+            * sum((Wx * data[:,0] + Wy * data[:,1] - data[:,2]) * data[:,1])
+
+# gradient_descent
+def batch_gradient_descent(Wlist):
+    for i in range(n_iter):
+        a, b = Wlist[i]
+        a = a - alpha * dJdx(a, b)
+        b = b - alpha * dJdy(a, b)
+        Wlist.append([a, b])
+    return Wlist
+
+def stochastic_gradient_descent(Wlist):
+
+Wlist = []
+n_iter = 75
+alpha = 0.01
+
+Wlist.append(10 * np.random.rand(2) - 5)
+Wlist = batch_gradient_descent(Wlist)
+ 
+v = np.array([J(a, b) for (a, b) in Wlist])
+
+def fig_config(ax, title, x, y, z=None):
+    ax.set_title(title)
+    ax.set_xlabel(x)
+    ax.set_ylabel(y)
+    if z is not None:
+        ax.set_zlabel(z)
+
+# set figure
+fig = plt.figure(figsize=((15, 10)))
 
 Wx = np.arange(-5, 5, 0.25)
 Wy = np.arange(-5, 5, 0.25)
 Wx, Wy = np.meshgrid(Wx, Wy)
 
 Z = np.zeros(np.shape(Wx))
-for i in range(data_len):
-    Z += 1. / (2 * data_len) * (Wx * data[i,0] + Wy * data[i,1] - data[i,2])**2
+Z = v_J(Wx, Wy)
 
-second = {}
-for number, position in enumerate([422, 424, 426, 428]):
-    second['ax{0}1'.format(number)] = fig.add_subplot(position, projection='3d')
-    second['ax{0}1'.format(number)].set_xlabel('Wx')
-    second['ax{0}1'.format(number)].set_ylabel('Wy')
-    second['ax{0}1'.format(number)].set_zlabel('diff')
-    second['ax{0}1'.format(number)].plot_surface(Wx, Wy, Z, rstride=4, cstride=4, cmap=cm.coolwarm)
+ax1 = fig.add_subplot(231, projection='3d')
+fig_config(ax1, 'Cost function', 'Wx', 'Wy', 'J')
+ax1.plot_surface(Wx, Wy, Z, rstride=4, cstride=4, cmap=cm.coolwarm, alpha=0.3)
+x = [a for a, b in Wlist]
+y = [b for a, b in Wlist]
+ax1.plot(x , y, v_J(x, y))
+ax1.scatter([x[i] for i in (0, 1, 5, 10, 20)]\
+        , [y[i] for i in (0, 1, 5, 10, 20)],\
+        [v_J(x, y)[i] for i in (0, 1, 5, 10, 20)]\
+        , c='r', marker='o')
 
-# We want a function F which, given x hours of work and y number of pauses as inputs, outputs an estimate grade
-# - first try :
-#       F(h, p) = wh * h + wp * p
+ax2 = fig.add_subplot(233)
+fig_config(ax2, 'convergence', 'nb_iteration', 'J')
+ax2.plot(v)
 
-# Cost Function
-#   J(wh, wp) = 1 / 2m * sum(((wh * hi + wp * pi - yi) ^ 2, i, 0, m - 1)
-#   where m is the number of given data, Xi/Yi the input/output of i-th data
+x = np.linspace(0, 14, 50)
+y = np.linspace(0, 10, 50)
+x, y = np.meshgrid(x, y)
 
-# Plot cost function on subplot 2
+def set_result(ax, nb_iter):
+    fig_config(ax, 'After ' + str(nb_iter) + ' iter', 'x', 'y', 'z')
+    ax.scatter(data[:,0], data[:,1], data[:,2], c='r', marker='o')
+    z = Wlist[nb_iter][0] * x + Wlist[nb_iter][1] * y
+    ax.plot_surface(x, y, z, alpha=0.4)
+
+ax3 = fig.add_subplot(234, projection='3d')
+set_result(ax3, 0)
+ax4 = fig.add_subplot(235, projection='3d')
+set_result(ax4, 10)
+ax5 = fig.add_subplot(236, projection='3d')
+set_result(ax5, 50)
 
 # Display figure
 plt.show()
