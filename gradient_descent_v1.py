@@ -4,6 +4,30 @@ from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
+# cost_func
+def J(Wx, Wy):
+    return sum(1./ (2 * data_len)\
+            * (Wx * data[:,0] + Wy * data[:,1] - data[:,2])**2)
+v_J = np.vectorize(J)
+
+# dJ/dWi
+def dJdx(Wx, Wy):
+    return 1./data_len\
+            * sum((Wx * data[:,0] + Wy * data[:,1] - data[:,2]) * data[:,1])
+def dJdy(Wx, Wy):
+    return 1./data_len\
+            * sum((Wx * data[:,0] + Wy * data[:,1] - data[:,2]) * data[:,2])
+
+# gradient_descent
+def gradient_descent(Wlist):
+    for i in range(n_iter):
+        a, b = Wlist[i]
+        a = a - alpha * dJdx(a, b)
+        b = b - alpha * dJdy(a, b)
+        Wlist.append([a, b])
+    return Wlist
+
+
 # Get data
 cwd = os.path.dirname(os.path.realpath(__file__)) 
 data = np.loadtxt(cwd + '/data.txt', delimiter=' ')
@@ -56,7 +80,6 @@ fig = plt.figure(figsize=((15, 10)))
 Wx = np.arange(-5, 5, 0.25)
 Wy = np.arange(-5, 5, 0.25)
 Wx, Wy = np.meshgrid(Wx, Wy)
-
 Z = np.zeros(np.shape(Wx))
 Z = v_J(Wx, Wy)
 
