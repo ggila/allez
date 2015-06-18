@@ -49,23 +49,25 @@ def dJdy(Wx, Wy):
 
 # gradient_descent
 def batch_gradient_descent(Wlist):
-    for i in range(n_iter):
-        a, b = Wlist[i]
-        a = a - alpha * dJdx(a, b)
-        b = b - alpha * dJdy(a, b)
-        Wlist.append([a, b])
+    it = ((i, j) for i in range(len(alpha)) for j in range(n_iter - 1))
+    for i, j in it:
+        a, b = Wlist[i][j][0:2]
+        a = a - alpha[i] * dJdx(a, b)
+        b = b - alpha[i] * dJdy(a, b)
+        Wlist[i, j + 1] = [a, b, J(a,b)]
     return Wlist
 
-def stochastic_gradient_descent(Wlist):
+#def stochastic_gradient_descent(Wlist):
 
-Wlist = []
-n_iter = 75
-alpha = 0.01
+n_iter = 100
+alpha = [0.04, 0.01, 0.001]
+Wlist = np.empty((len(alpha), n_iter, 3))
 
-Wlist.append(10 * np.random.rand(2) - 5)
+weight_init = 10 * np.random.rand(3) - 5
+weight_init[2] = J(weight_init[0], weight_init[1])
+for i in range(len(alpha)):
+    Wlist[i][0] = weight_init
 Wlist = batch_gradient_descent(Wlist)
- 
-v = np.array([J(a, b) for (a, b) in Wlist])
 
 def fig_config(ax, title, x, y, z=None):
     ax.set_title(title)
@@ -86,8 +88,8 @@ Z = v_J(Wx, Wy)
 ax1 = fig.add_subplot(231, projection='3d')
 fig_config(ax1, 'Cost function', 'Wx', 'Wy', 'J')
 ax1.plot_surface(Wx, Wy, Z, rstride=4, cstride=4, cmap=cm.coolwarm, alpha=0.3)
-x = [a for a, b in Wlist]
-y = [b for a, b in Wlist]
+x = [a for a, b in Wlist[1, :, 0:2]]
+y = [b for a, b in Wlist[1, :, 0:2]]
 ax1.plot(x , y, v_J(x, y))
 ax1.scatter([x[i] for i in (0, 1, 5, 10, 20)]\
         , [y[i] for i in (0, 1, 5, 10, 20)],\
@@ -96,7 +98,9 @@ ax1.scatter([x[i] for i in (0, 1, 5, 10, 20)]\
 
 ax2 = fig.add_subplot(233)
 fig_config(ax2, 'convergence', 'nb_iteration', 'J')
-ax2.plot(v)
+ax2.plot(Wlist[0, :, 2], c='r')
+ax2.plot(Wlist[1, :, 2], c='g')
+ax2.plot(Wlist[2, :, 2], c='b')
 
 x = np.linspace(0, 14, 50)
 y = np.linspace(0, 10, 50)
@@ -105,7 +109,7 @@ x, y = np.meshgrid(x, y)
 def set_result(ax, nb_iter):
     fig_config(ax, 'After ' + str(nb_iter) + ' iter', 'x', 'y', 'z')
     ax.scatter(data[:,0], data[:,1], data[:,2], c='r', marker='o')
-    z = Wlist[nb_iter][0] * x + Wlist[nb_iter][1] * y
+    z = Wlist[1][nb_iter][0] * x + Wlist[1][nb_iter][1] * y
     ax.plot_surface(x, y, z, alpha=0.4)
 
 ax3 = fig.add_subplot(234, projection='3d')
