@@ -43,7 +43,6 @@ weight_init[2] = J(weight_init[0], weight_init[1])
 
 for i in range(len(alpha)):
     Wlist[i][0] = weight_init
-
 Wlist = batch_gradient_descent(Wlist, alpha)
 
 def fig_config(ax, title, x, y, z=None):
