@@ -13,7 +13,7 @@ b.select_form(nr=0)
 b['login']='ggilaber'
 b.submit()
 b.select_form(nr=0)
-b['password']=''
+b['password']=
 b.submit()
 
 for piscine in ['php','cpp','ocaml','unity']:
