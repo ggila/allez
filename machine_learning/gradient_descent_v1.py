@@ -27,13 +27,14 @@ def dJdy(Wx, Wy):
 def batch_gradient_descent(Wlist, alpha):
     for i, j in ((i, j) for i in range(len(alpha)) for j in range(n_iter - 1)):
         a, b = Wlist[i][j][0:2]
+        temp = a
         a = a - alpha[i] * dJdx(a, b)
-        b = b - alpha[i] * dJdy(a, b)
+        b = b - alpha[i] * dJdy(temp, b)
         Wlist[i, j + 1] = [a, b, J(a,b)]
     return Wlist
 
 n_iter = 75
-alpha = [0.04, 0.01, 0.001]
+alpha = [0.03, 0.01, 0.001]
 Wlist = np.empty((len(alpha), n_iter, 3))
 
 weight_init = np.empty(3)
@@ -64,7 +65,7 @@ Z = v_J(Wx, Wy)
 ax1 = plt.subplot2grid((3,3), (0,0), colspan=2, rowspan=2, projection='3d')
 fig_config(ax1, 'Cost function', 'Wx', 'Wy', 'J')
 ax1.plot_surface(Wx, Wy, Z, rstride=2, cstride=2, cmap=cm.coolwarm, alpha=0.3)
-for i, col in enumerate(['r','g','b']):
+for i, col in zip([1, 2], ['g','b']):
     x = [a for a, b in Wlist[i, :, 0:2]]
     y = [b for a, b in Wlist[i, :, 0:2]]
     ax1.plot(x , y, v_J(x, y), c=col) if i != 0\
@@ -73,6 +74,11 @@ for i, col in enumerate(['r','g','b']):
             , [y[j] for j in (0, 1, 5, 10, 20)],\
             [v_J(x, y)[j] for j in (0, 1, 5, 10, 20)]\
             , c=col, marker='o')
+
+x = [a for a, b in Wlist[0, :7, 0:2]]
+y = [b for a, b in Wlist[0, :7, 0:2]]
+ax1.plot(x , y, v_J(x, y), c='r') if i != 0\
+        else ax1.plot(x[0:11] , y[0:11], v_J(x, y)[0:11], c='r')
 
 ax2 = fig.add_subplot(3,3,3)
 fig_config(ax2, 'convergence', 'nb_iteration', 'J')

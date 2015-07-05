@@ -1,31 +1,36 @@
+import getpass
 import mechanize
 import re
 
-url = 'https://duoquadragintien.fr'
+url = 'http://duoquadragintien.fr'
 
-fd=open('hours.txt', 'w')
+fd=open('hours_all.txt', 'w')
 
-pattern = re.compile('<td>Jun \d\d, 2015, \d:\d\d:\d\d [AP]M</td><td>([\d.]+)<')
+pattern = re.compile('2015-6-\d\d 00:00:00 \+0100":([0-9.]+)')
+
+print 'Connecting to ' + url
+login = raw_input('login : ')
+pwd = getpass.getpass('password : ')
 
 b = mechanize.Browser()
 b.open(url)
 b.select_form(nr=0)
-b['login']='ggilaber'
+b['login'] = login
 b.submit()
 b.select_form(nr=0)
-b['password']=''
+b['password'] = pwd
 b.submit()
 
-for piscine in ['php','cpp','ocaml','unity']:
-    with open('./' + piscine + '.txt', 'r') as f:
-        for line in f:
-            b.select_form(nr=0)
-            b['login'] = line[:-1]
-            data = b.submit().read()
-            r = re.finditer(pattern, data)
-            fd.write(line[:-1])
-            for i in range(8):
-                elem = next(r)
-                fd.write(' ' + r.group(1))
+with open('student.txt', 'r') as f:
+    for line in f:
+        b.select_form(nr=0)
+        b['login'] = line[:-1]
+        data = b.submit().read()
+        r = re.finditer(pattern, data)
+        fd.write(line[:-1])
+        for i in range(8):
+            elem = next(r)
+            fd.write(' ' + elem.group(1))
+        fd.write('\n')
 
 fd.close()

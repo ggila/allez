@@ -22,7 +22,7 @@ b = mechanize.Browser()
 b.open(url)
 b.select_form(nr=0)
 b['user[login]']='ggilaber'
-b['user[password]']=''
+b['user[password]']=
 b.submit()
 
 with open('./student.txt', 'r') as f:
