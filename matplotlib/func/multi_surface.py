@@ -1,5 +1,4 @@
 import numpy as np
-from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
@@ -12,5 +11,14 @@ x, y = np.meshgrid(x, y)
 z = (x+y)**2 + 6*(x+y) + 4
 
 ax.plot_surface(x, y, z)
+
+a = np.array([-100, 100])
+b = np.array([100,-100])
+a = np.repeat(a[..., np.newaxis], 2, axis=1)
+b = np.repeat(b[..., np.newaxis], 2, axis=1)
+c = np.meshgrid(np.array([-5000,40000]), np.arange(2))[0]
+
+ax.plot_surface(a, b, c, color='r', alpha=0.3)
+
 
 plt.show()
