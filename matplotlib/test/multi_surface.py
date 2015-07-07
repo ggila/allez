@@ -10,7 +10,7 @@ x, y = np.meshgrid(x, y)
 
 z = (x+y)**2 + 6*(x+y) + 4
 
-ax.plot_surface(x, y, z)
+ax.plot_surface(x, y, z, rstride=200, cstride=200)
 
 a = np.array([-100, 100])
 b = np.array([100,-100])

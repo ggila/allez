@@ -6,11 +6,14 @@ import matplotlib.pyplot as plt
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-x = y = np.arange(-100, 100, 1)
+x = y = np.arange(-10, 10, 0.1)
 x, y = np.meshgrid(x, y)
 
-z = (x+y)**2 + 6*(x+y) + 4
+z = 30*x + 10*y
+ax.plot_surface(x, y, z, rstride=200, cstride=200, alpha=1, color = 'r')
 
-ax.plot_surface(x, y, z)
+z = x**2 + y**2
+ax.plot_surface(x, y, z, rstride=10, cstride=10, cmap=cm.coolwarm)
+
 
 plt.show()
