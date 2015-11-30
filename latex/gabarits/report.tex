@@ -1,0 +1,31 @@
+\documentclass[a4paper,10pt]{report}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % Pour changer le pack de police
+\usepackage{makeidx}
+\title{Le titre}
+\author{\textsc{Nom} Prénom}
+\date{} % Pour mettre la date du jour, tapez \today 
+
+\title{Mon titre d'article}
+\date{}
+\author{Laleloulilo}
+\makeindex
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Le résumé (abstract en anglais) de mon article.
+\end{abstract}
+
+
+\tableofcontents
+
+
+Bla\index{bla} bla bla
+
+\listoffigures
+\listoftables
+\printindex
+\end{document}

@@ -1,0 +1,20 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel} % Pour changer le pack de police
+
+\usepackage{makeidx}
+
+\usepackage{setspace}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{fancyhdr}
+
+\fancyhf{}
+\pagestyle{fancy}
+\lhead{\leftmark}
+\chead{}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage}
+
+\makeindex

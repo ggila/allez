@@ -1,0 +1,71 @@
+\select@language {french}
+\thispagestyle {empty}
+\thispagestyle {empty}
+\contentsline {part}{I\hspace {1em}Partie th\IeC {\'e}orique}{1}
+\contentsline {chapter}{\numberline {1}Clinique de l'adolescent}{3}
+\contentsline {section}{\numberline {1.1}Les remaniements psychiques de l'adolescence\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}: les principaux aspects dynamiques}{3}
+\contentsline {subsection}{\numberline {1.1.1}L'excitation sexuelle}{4}
+\contentsline {subsection}{\numberline {1.1.2}La probl\IeC {\'e}matique du corps}{5}
+\contentsline {subsection}{\numberline {1.1.3}Le Narcissisme}{5}
+\contentsline {subsection}{\numberline {1.1.4}La place de l'Id\IeC {\'e}al du Moi \IeC {\`a} l'adolescence}{6}
+\contentsline {subsection}{\numberline {1.1.5}Identit\IeC {\'e} et Identification}{6}
+\contentsline {section}{\numberline {1.2}Les remaniements psychiques de l'adolescence\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}: La question de la s\IeC {\'e}paration et de l'individuation}{7}
+\contentsline {subsection}{\numberline {1.2.1}De la petite enfance \IeC {\`a} l'adolescence}{7}
+\contentsline {subsection}{\numberline {1.2.2}De l'importance du premier lien objectal primaire \IeC {\`a} l'advenue des fonctions symboliques}{8}
+\contentsline {subsection}{\numberline {1.2.3}Les effets pathologiques d'une d\IeC {\'e}faillance du premier lien objectale primaire}{9}
+\contentsline {subsection}{\numberline {1.2.4}La d\IeC {\'e}pendance \IeC {\`a} l'environnement}{10}
+\contentsline {subsection}{\numberline {1.2.5}L'am\IeC {\'e}nagement d\IeC {\'e}fensif de l'adolescent en souffrance\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}: La mise en acte}{12}
+\contentsline {chapter}{\numberline {2}Clinique de l'acte d\IeC {\'e}viant\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}: la violence}{15}
+\contentsline {section}{\numberline {2.1}De la violence \IeC {\`a} l'agressivit\IeC {\'e}}{15}
+\contentsline {subsection}{\numberline {2.1.1}Les origines de la violence}{15}
+\contentsline {subsection}{\numberline {2.1.2}La violence comme r\IeC {\'e}sultante d'une d\IeC {\'e}sintrication pulsionnelle}{16}
+\contentsline {subsection}{\numberline {2.1.3}La violence comme r\IeC {\'e}ponse \IeC {\`a} une faille narcissique}{17}
+\contentsline {subsection}{\numberline {2.1.4}La violence comme rempart contre la d\IeC {\'e}pression}{17}
+\contentsline {subsection}{\numberline {2.1.5}La violence comme r\IeC {\'e}sultante de la d\IeC {\'e}faillance du Surmoi}{18}
+\contentsline {section}{\numberline {2.2}La mise en acte\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}: Passage \IeC {\`a} l'Acte et \IeC {\guillemotleft }\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}Acting-Out\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}\IeC {\guillemotright }}{19}
+\contentsline {subsection}{\numberline {2.2.1}Le Passage \IeC {\`a} l'acte}{20}
+\contentsline {subsection}{\numberline {2.2.2}l' \IeC {\guillemotleft }\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}Acting-out\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}\IeC {\guillemotright }}{20}
+\contentsline {chapter}{\numberline {3}Clinique de l'institution}{23}
+\contentsline {section}{\numberline {3.1}D'une clinique individuelle \IeC {\`a} une clinique sociale}{23}
+\contentsline {section}{\numberline {3.2}L'institution comme cadre th\IeC {\'e}rapeutique participant \IeC {\`a} la fonction de pare-excitation}{24}
+\contentsline {subsection}{\numberline {3.2.1}L'institution\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}: \IeC {\guillemotleft }\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}une maintenance et contenance psychique\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}\IeC {\guillemotright }\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}: L'importance de son principe d'intervention}{25}
+\contentsline {subsection}{\numberline {3.2.2}L'importance d'un \IeC {\guillemotleft }\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}cadre\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}\IeC {\guillemotright }}{26}
+\contentsline {subsection}{\numberline {3.2.3}L'institution\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}: une repr\IeC {\'e}sentation symbolique de la soci\IeC {\'e}t\IeC {\'e} et de la culture}{27}
+\contentsline {subsection}{\numberline {3.2.4}L'institution comme fonction de \IeC {\guillemotleft }\GenericError {(inputenc) }{Package inputenc Error: Unicode char \u 8:  not set up for use with LaTeX}{See the inputenc package documentation for explanation.}{Your command was ignored.\MessageBreak Type I <command> <return> to replace it with another command,\MessageBreak or <return> to continue without it.}pare-excitation~\IeC {\guillemotright }}{29}
+\contentsline {part}{II\hspace {1em}Partie m\IeC {\'e}thodologique}{33}
+\contentsline {chapter}{\numberline {4}Probl\IeC {\'e}matique}{35}
+\contentsline {paragraph}{Hypoth\IeC {\`e}se g\IeC {\'e}n\IeC {\'e}rale}{37}
+\contentsline {chapter}{\numberline {5}Protocole de recherche}{39}
+\contentsline {section}{\numberline {5.1}Population}{40}
+\contentsline {section}{\numberline {5.2}M\IeC {\'e}thode}{40}
+\contentsline {subsection}{\numberline {5.2.1}Passation des entretiens}{41}
+\contentsline {subsection}{\numberline {5.2.2}Analyse des entretiens}{42}
+\contentsline {subsection}{\numberline {5.2.3}Le Test de Rorschach}{43}
+\contentsline {chapter}{\numberline {6}R\IeC {\'e}sultats}{47}
+\contentsline {section}{\numberline {6.1}Cas clinique de Julien}{47}
+\contentsline {subsection}{\numberline {6.1.1}Passation de l'entretien}{47}
+\contentsline {subsection}{\numberline {6.1.2}Analyse de l'entretien}{47}
+\contentsline {subsubsection}{Analyse du parcours de vie du sujet adolescent}{47}
+\contentsline {subsubsection}{Analyse de son rapport \IeC {\`a} l'acte}{49}
+\contentsline {subsubsection}{Analyse de son rapport \IeC {\`a} l'institution}{51}
+\contentsline {subsection}{\numberline {6.1.3}Analyse Clinique}{52}
+\contentsline {subsubsection}{Probl\IeC {\'e}matique objectale et narcissique du sujet}{52}
+\contentsline {subsubsection}{Modalit\IeC {\'e}s de traitement des motions pulsionnelles}{54}
+\contentsline {subsubsection}{Les effets de la figuration psychique de l'institution sur Julien}{55}
+\contentsline {section}{\numberline {6.2}Cas clinique de Marc}{57}
+\contentsline {subsection}{\numberline {6.2.1}Passation de Marc}{57}
+\contentsline {subsection}{\numberline {6.2.2}Analyse de l'entretien}{57}
+\contentsline {subsubsection}{Analyse du parcours de vie du sujet adolescent}{57}
+\contentsline {subsubsection}{Analyse de son rapport \IeC {\`a} l'acte}{60}
+\contentsline {subsubsection}{Analyse de son rapport \IeC {\`a} l'institution}{61}
+\contentsline {subsection}{\numberline {6.2.3}Analyse clinique}{63}
+\contentsline {subsubsection}{Probl\IeC {\'e}matique objectale et narcissique du sujet}{63}
+\contentsline {subsubsection}{Traitement des motions pulsionnelles}{64}
+\contentsline {subsubsection}{Les effets de la figuration psychique de l'institution pour Marc}{65}
+\contentsline {chapter}{\numberline {7}Synth\IeC {\`e}se des r\IeC {\'e}sultats}{67}
+\contentsline {section}{\numberline {7.1}Synth\IeC {\`e}se des fonctionnements psychiques et de leurs rapports \IeC {\`a} l'institution en tant que figuration psychique}{67}
+\contentsline {section}{\numberline {7.2}Interpr\IeC {\'e}tation sur l'\IeC {\'e}chec de la fonction de pare excitation de l'institution}{70}
+\contentsline {chapter}{\numberline {8}Discussion et conclusion}{73}
+\contentsline {section}{\numberline {8.1}Discussion th\IeC {\'e}orique et m\IeC {\'e}thodologique}{73}
+\contentsline {section}{\numberline {8.2}Discussion concernant la position du chercheur sur le terrain}{75}
+\contentsline {section}{\numberline {8.3}Discussion empirique}{76}
