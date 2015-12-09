@@ -27,9 +27,8 @@ def dJdy(Wx, Wy):
 def batch_gradient_descent(Wlist, alpha):
     for i, j in ((i, j) for i in range(len(alpha)) for j in range(n_iter - 1)):
         a, b = Wlist[i][j][0:2]
-        temp = a
-        a = a - alpha[i] * dJdx(a, b)
-        b = b - alpha[i] * dJdy(temp, b)
+#        temp = a
+        a, b = a - alpha[i] * dJdx(a, b), b - alpha[i] * dJdy(a, b)
         Wlist[i, j + 1] = [a, b, J(a,b)]
     return Wlist
 

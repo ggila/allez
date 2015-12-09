@@ -1,3 +1,4 @@
+import getpass
 import mechanize
 import re
 
@@ -22,7 +23,7 @@ b = mechanize.Browser()
 b.open(url)
 b.select_form(nr=0)
 b['user[login]']='ggilaber'
-b['user[password]']=
+b['user[password]']= getpass.getpass()
 b.submit()
 
 with open('./student.txt', 'r') as f:
