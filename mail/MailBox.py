@@ -24,7 +24,6 @@ class MailBox:
 
     def __init__(self, user):
         self.user = user
-        if not self.user: self.user = 'gilabertgautier@gmail.com'
         self.pwd = getpass.getpass('pwd: ')
 #        try:
         self.m = imaplib.IMAP4_SSL("imap.gmail.com") # connecting to the gmail imap server
