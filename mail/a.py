@@ -33,9 +33,20 @@ heures = [[a, b, b-a] for a, b in heures]
 def getDay(d):
     return datetime.datetime(d.year, d.month, d.day)
 
+dataDay = []
+it = iter(hours)
+
 begin = getDay(heures[0][0])
 end = getDay(heures[-1][1])
-
+day = begin
+session = it.next()
+day_next_session = getDay(session[0])
+while day <= end:
+    dayWork = 0
+    day_next_session = getDay(session[0])
+    if day = day_next_session:
+    dataDay.append([day, getDayWork(day)])
+    
 #def decoupe(a):
 #    return a[1] - a[0]
 #
