@@ -2,54 +2,111 @@ import re
 import os
 import datetime
 import MailBox as MB
-import matplotlib.pyplot as plt
-import numpy as np
+#import matplotlib.pyplot as plt
+#import numpy as np
 
-def cast(sess):
-    return [datetime.datetime.strptime(s, '%Y-%m-%d %H:%M:%S') for s in sess]
+##
+# Get Usr
+##
 
 user = raw_input('user: ')
 if not user: user = 'gilabertgautier@gmail.com'
 
-if not (os.path.exists(user)):    #check if user known
-    mb = MB.MailBox(user)         #if not, get data from gmail
+##
+# Get Data
+##
+
+if not (os.path.exists(user)):      #check if user known
+    mb = MB.MailBox(user)       #if not, get data from gmail
     data = mb.getPattern(mb.getMailFrom('bigbrother'))
-    pattern = '[0-9]{4}.{15}'
-    heures = [re.findall(pattern, sess) for sess in data] #get formated data from mail
-    with open(user, 'w') as f:   #save data
+    pattern = '[0-9]{4}.{15}'       # Get line with date of checkin checkout
+    heures = [re.findall(pattern, sess) for sess in data]       #get formated data from mail
+    with open(user, 'w') as f:      #save data
         for a, b in heures:
             f.write('{0}, {1}\n'.format(a, b))
+else:                           #get data from file
+    heures = []
+    with open(user, 'r') as f:
+        for line in f:
+            heures.append(line[:-1].split(', '))
 
 
-heures = []
+##
+# Process Data
+##
 
-with open(user, 'r') as f:
-    for line in f:
-        heures.append(line[:-1].split(', '))
-heures = map(cast, heures)
+def castStrDate(sess):      #cast str to datetime.datetime
+    return [datetime.datetime.strptime(s, '%Y-%m-%d %H:%M:%S') for s in sess]
+
+heures = map(castStrDate, heures)
 heures = [[a, b, b-a] for a, b in heures]
-
 
 def getDay(d):
     return datetime.datetime(d.year, d.month, d.day)
 
 dataDay = []
-it = iter(hours)
+dataWeek = []
 
 begin = getDay(heures[0][0])
 end = getDay(heures[-1][1])
 day = begin
-session = it.next()
-day_next_session = getDay(session[0])
+
+it = iter(heures)
+checkIn, checkOut, delta = it.next()
+weekWork = datetime.timedelta(0)
+
+dayOf = [[], [], []]
+NbOf = 0
+isPrevDayOf = 0
 while day <= end:
-    dayWork = 0
-    day_next_session = getDay(session[0])
-    if day = day_next_session:
-    dataDay.append([day, getDayWork(day)])
-    
-#def decoupe(a):
-#    return a[1] - a[0]
-#
+    dayWork = datetime.timedelta(0)
+    while day == getDay(checkIn):
+        if day == getDay(checkOut):
+            dayWork = dayWork + delta
+            try:
+                checkIn, checkOut, delta = it.next()
+            except:
+                checkIn = day + datetime.timedelta(1)
+        else:
+            nextDay = day + datetime.timedelta(1)
+            dayWork = dayWork + (nextDay - checkIn)
+            delta = delta - dayWork
+            checkIn = nextDay
+
+    weekWork += dayWork
+    dataDay.append(dayWork)
+
+    if dayWork == datetime.timedelta(0):
+        NbOf += 1
+        if isPrevDayOf == 0:
+            dayOf[0].append(day)
+            isPrevDayOf = 1
+    else:
+        if isPrevDayOf != 0:
+            isPrevDayOf = 0
+            dayOf[1].append(NbOf)
+        NbOf = 0
+    dayOf[2].append(isPrevDayOf)
+
+    if day.weekday() == 6:
+        dataWeek.append(weekWork)
+        weekWork = datetime.timedelta(0)
+
+    day += datetime.timedelta(1)
+
+
+firstWeekLen = 1
+d = begin
+while (d.weekday() != 6):
+    firstWeekLen += 1
+    d += datetime.timedelta(1)
+
+lastWeekLen = 1
+d = end
+while (d.weekday() != 0):
+    lastWeekLen += 1
+    d -= datetime.timedelta(1)
+
 #hours = np.array(heures, dtype='datetime64')
 #
 #begin = np.datetime64("2015-05-04")
