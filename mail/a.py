@@ -86,6 +86,7 @@ while day <= end:
             isPrevDayOf = 0
             dayOf[1].append(NbOf)
         NbOf = 0
+
     dayOf[2].append(isPrevDayOf)
 
     if day.weekday() == 6:
