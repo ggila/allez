@@ -4,9 +4,9 @@ import imaplib
 import re
 
 class MailBox:
-"""
+    """
     mailbox interaction with imap protocol
-"""
+    """
 
     def getPattern(self, emailId):
         session = []

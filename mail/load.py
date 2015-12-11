@@ -1,6 +1,5 @@
 import re
 import os
-import datetime
 import MailBox as MB
 
 # Get Usr
@@ -10,6 +9,11 @@ if not user: user = 'gilabertgautier@gmail.com'
 
 # Get Data
 # 'bigbrother' send every week a list of each checkin/checkout 
+# this module creates list 'sessions'
+# [['2015-05-08 15:46:06', '2015-05-08 17:21:36'],
+#  ['2015-05-08 17:10:53', '2015-05-09 06:30:08'],
+#                       ...
+
 
 if not (os.path.exists(user)):      #check if user known
     mb = MB.MailBox(user)       #if not, get data from gmail
