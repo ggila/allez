@@ -1,35 +1,6 @@
-import re
-import os
-import datetime
-import MailBox as MB
-#import matplotlib.pyplot as plt
-#import numpy as np
+import load
 
-##
-# Get Usr
-##
-
-user = raw_input('user: ')
-if not user: user = 'gilabertgautier@gmail.com'
-
-##
-# Get Data
-##
-
-if not (os.path.exists(user)):      #check if user known
-    mb = MB.MailBox(user)       #if not, get data from gmail
-    data = mb.getPattern(mb.getMailFrom('bigbrother'))
-    pattern = '[0-9]{4}.{15}'       # Get line with date of checkin checkout
-    heures = [re.findall(pattern, sess) for sess in data]       #get formated data from mail
-    with open(user, 'w') as f:      #save data
-        for a, b in heures:
-            f.write('{0}, {1}\n'.format(a, b))
-else:                           #get data from file
-    heures = []
-    with open(user, 'r') as f:
-        for line in f:
-            heures.append(line[:-1].split(', '))
-
+session = pd.DataFrame(load.heures, columns=['checkIn','checkOut'])
 
 ##
 # Process Data
@@ -38,20 +9,17 @@ else:                           #get data from file
 def castStrDate(sess):      #cast str to datetime.datetime
     return [datetime.datetime.strptime(s, '%Y-%m-%d %H:%M:%S') for s in sess]
 
-heures = map(castStrDate, heures)
-heures = [[a, b, b-a] for a, b in heures]
-
-def getDay(d):
-    return datetime.datetime(d.year, d.month, d.day)
+sessions = map(castStrDate, heures)
+sessions = [[a, b, b-a] for a, b in sessions]  sessions = checkIn, checkOut, lenght
 
 dataDay = []
 dataWeek = []
 
-begin = getDay(heures[0][0])
-end = getDay(heures[-1][1])
+begin = getDay(sessions[0][0])
+end = getDay(sessions[-1][1])
 day = begin
 
-it = iter(heures)
+it = iter(sessions)
 checkIn, checkOut, delta = it.next()
 weekWork = datetime.timedelta(0)
 
@@ -108,7 +76,7 @@ while (d.weekday() != 0):
     lastWeekLen += 1
     d -= datetime.timedelta(1)
 
-#hours = np.array(heures, dtype='datetime64')
+#hours = np.array(sessions, dtype='datetime64')
 #
 #begin = np.datetime64("2015-05-04")
 #end = np.datetime64("2015-12-07")
