@@ -3,16 +3,13 @@ import os
 import datetime
 import MailBox as MB
 
-##
 # Get Usr
-##
 
 user = raw_input('user: ')
 if not user: user = 'gilabertgautier@gmail.com'
 
-##
 # Get Data
-##
+# 'bigbrother' send every week a list of each checkin/checkout 
 
 if not (os.path.exists(user)):      #check if user known
     mb = MB.MailBox(user)       #if not, get data from gmail
