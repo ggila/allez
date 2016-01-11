@@ -2,32 +2,31 @@ import load
 import numpy as np
 import matplotlib.pyplot as plt
 
+def GetMonday(firstDay, way='forward'):
+    firstEntry = firstDay.astype('M8[D]')
+    beforeMonday = np.busday_offset(firstEntry, 0, way, [1,0,0,0,0,0,0])
+    if abs(firstEntry-beforeMonday) == np.timedelta64(7, 'D'):
+        return firstEntry.astype('M8[s]')
+    else:
+        return beforeMonday.astype('M8[s]')
+
 # Process Data
 
-sessions = np.array(load.sessions, dtype='datetime64') # load data
+log = np.array(load.sessions, dtype='datetime64') # load data
 
 # init some const
 
-begin_dt64 = np.datetime64("2015-05-04") # first monday
-end_dt64 = np.datetime64("2015-12-07") # last monday
+begin = GetMonday(np.min(log.flatten()), way='backward')
+end = GetMonday(np.max(log.flatten()))
 
+n_logs = log.shape[0]*1.0
 week_td64 = np.timedelta64(1, 'W')
 
-nbWeek_td64 = int((end_dt64 - begin_dt64) / week_td64)
+weeks_entry = np.floor((log[:,0]-begin)/week_td64)
+hours_spent = (log[:,1]-log[:,0]).astype('timedelta64[m]')
 
-week = begin_dt64 + np.arange(nbWeek_td64) * week_td64 # array of week
+week_hours = np.bincount(weeks_entry.astype('int64'), hours_spent.astype('float64') / 60)
 
-weekHours = []
-
-
-for w in week:
-    mask1 = sessions[:,0] > w
-    mask2 = sessions[:,0] < w  + week_td64
-    sess = sessions[mask1 & mask2]
-    weekHours.append((sess[:,1] - sess[:,0]).sum())
-
-weekHours = np.array(weekHours) / 3600.0
-
-plt.plot(week, weekHours, 'b+')
+plt.plot(np.arange(begin, end, week_td64), week_hours, 'b')
 
 plt.show()
