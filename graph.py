@@ -1,17 +1,7 @@
+
+# node id is a dict key: it musts be hashable (__eq__ and __hash__ should be define)
+
 class graph:
-
-    class node:
-
-        def __init__(self, x, y):
-            self.x = x
-            self.y = y
-
-        # if node is defined by its position
-        def __eq__(self, other):
-            return (self.x, self.y) == (other.x, other.y)
-
-        def __hash__(self):
-            return 8 * self.x - self.y
 
     def __init__(self):
         self.nodes = dict()
@@ -19,16 +9,22 @@ class graph:
     def __contains__(self, n):
         return n in self.nodes
 
-    def addNodeAtPos(self, x, y):
-        new = graph.node(x, y)
-        if new not in self.nodes:
-            self.nodes[new] = set()
-            return new
-        else: return 
+    def _getNode(self, nodeId):
+        ''' return node with nodeId (initialize new node if nodeId does not exist)'''
+        if nodeId not in self.nodes:
+            self.nodes[nodeId] = {'neigh' : set(),
+                                  'pos' : None}
+        return self.nodes[nodeId]
 
-    def addEdge(self, edge):
-        ax, ay, bx, by = edge
-        n1 = self.addNodeAtPos(ax, ay)
-        n2 = self.addNodeAtPos(bx, by)
-        self.nodes[n1].add(n2)
-        self.nodes[n2].add(n1)
+    def addNode(self, nodeId, position=None, neighbour=set()):
+        node = self._getNode(nodeId)
+        if node['pos'] and node['pos'] != position:
+            raise Exception('node {} already defined, position conflict'.format(nodeId))
+        node['pos'] = position
+        for n in neighbour: self.addEdge(nodeId, n)
+
+    def addEdge(self, nId1, nId2):
+        n1, n2 = self._getNode(nId1), self._getNode(nId2)
+        n1['neigh'].update((nId2,))
+        n2['neigh'].update((nId1,))
+
