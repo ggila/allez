@@ -1,19 +1,29 @@
 
 import copy
 
-# node id is a dict key: it musts be hashable (__eq__ and __hash__ should be define)
+# node id is a dict key: it musts be hashable (__eq__ and __hash__ should be define).
+# it should also have __str__ for graph.__repr__
+
+# if some time some day, change node and edge representation (dict -> namedtuple)
 
 class graph:
 
-    def __init__(self, nodes=[], edges=[], directed=False):
-        self.nodes = dict()
+    def __init__(self, nodes=[], edges=[]):
+        self.nodes, self.edges = dict(), dict()
         for n in nodes: self.addNode(n)
-        for e in edges:
-            n1, n2 = e
-            self.addEdge(n1, n2, directed)
+        self.addEdges(edges)
+
+    def _getEdgesRepr(self):
+        return ', '.join(['({}, True, {})'.format(a, c) for a, b in self.edges.items() for c in b])
 
     def __repr__(self):
-        return str(self.nodes)
+        return '{0}(nodes=({1}), edges=({2}))'.format(self.__class__.__name__,
+                                                      ', '.join([str(a) for a in self.nodes]),
+                                                      self._getEdgesRepr())
+
+    def __str__(self):
+#        l = [(k, v['pos'], v['neigh']) for (k,v) in self.nodes]
+#        return '\n'.join(['{}: {}({})'.format(str(k),u,w)] for)
 
     def __getitem__(self, nodeId):
         return self.nodes[nodeId]
@@ -28,6 +38,12 @@ class graph:
                                   'pos' : None}
         return self.nodes[nodeId]
 
+    def _getEdge(self, edge):
+        ''' return edge, initialize new edge if it does not exist '''
+        if edge not in self.edges:
+            self.edges[edge] = []
+        return self.edges[edge]
+
     def getNeighbour(self, nodeId):
         return self.nodes[nodeId]['neigh']
 
@@ -41,11 +57,16 @@ class graph:
     def addNodes(self, nodes):
         for n in nodes: self.addNode(n)
 
-    def addEdge(self, nId1, nId2, directed=False):
-        n1, n2 = self._getNode(nId1), self._getNode(nId2)
+    def addDirectedEdge(self, nId1, nId2, weight=1):
+        edge = self._getEdge((nId1, nId2))
+        edge.append(weight)
+        n1 = self._getNode(nId1)
         n1['neigh'].update((nId2,))
+
+    def addEdge(self, nId1, nId2, directed=False, weight=1):
+        self.addDirectedEdge(nId1, nId2, weight)
         if not directed:
-            n2['neigh'].update((nId1,))
+            self.addDirectedEdge(nId2, nId1, weight)
 
     def addEdges(self, edges=[], directed_edges=[]):
         for e in edges: self.addEdge(*e)
@@ -64,6 +85,15 @@ class graph:
         for k, v in self.nodes.items():
             yield from self._findCircuit(k, [k], len(self.nodes) - 1)
         yield []
+
+    def findEulerianPath(self):
+        pass
+
+    def findMinPath(self):
+        pass
+
+    def findPath(self):
+        pass
 
     def getCircuit(self):
         return list(self.findCircuit())[:-1]
