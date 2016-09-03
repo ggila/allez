@@ -1,5 +1,6 @@
 
-import copy
+import heapq
+from itertools import count
 
 # node id is a dict key: it musts be hashable (__eq__ and __hash__ should be define).
 # it should also have __str__ for graph.__repr__
@@ -13,17 +14,19 @@ class graph:
         for n in nodes: self.addNode(n)
         self.addEdges(edges)
 
-    def _getEdgesRepr(self):
-        return ', '.join(['({}, True, {})'.format(a, c) for a, b in self.edges.items() for c in b])
-
     def __repr__(self):
+        def getEdgesRepr(self):
+            return ', '.join(['({}, True, {})'.format(a, c) for a, b in self.edges.items() for c in b])
+
         return '{0}(nodes=({1}), edges=({2}))'.format(self.__class__.__name__,
                                                       ', '.join([str(a) for a in self.nodes]),
-                                                      self._getEdgesRepr())
+                                                      getEdgesRepr(self))
 
     def __str__(self):
-#        l = [(k, v['pos'], v['neigh']) for (k,v) in self.nodes]
-#        return '\n'.join(['{}: {}({})'.format(str(k),u,w)] for)
+        def getWeight(self, nodeId, neighbours):
+            return ', '.join(['{} {}'.format(n, tuple(self.edges[(nodeId, n)])) for n in neighbours])
+        l = [(k, v['pos'], v['neigh']) for (k,v) in self.nodes.items()]
+        return '\n'.join(['{} ({}): {}'.format(str(a),b,getWeight(self, a, c)) for (a, b, c) in l])
 
     def __getitem__(self, nodeId):
         return self.nodes[nodeId]
@@ -89,11 +92,22 @@ class graph:
     def findEulerianPath(self):
         pass
 
-    def findMinPath(self):
-        pass
+    def _findPath(self, start, end, h, counter):
+        if not h: return
+        W, _, way, wway = heapq.heappop(h)
+        if way[-1] == end:
+            yield (way, wway)
+        else:
+            for n in self.getNeighbour(way[-1]):
+                if n not in way:
+                    for w in self.edges[(way[-1], n)]:
+                        heapq.heappush(h, (W + w, next(counter), way + [n], wway + [w]))
+        yield from self._findPath(start, end, h, counter)
 
-    def findPath(self):
-        pass
+    def findPath(self, start, end):
+        counter = count()  # counter is used to sort stability (tuple comparison)
+        h = [(0, next(counter), [start], [])]
+        yield from self._findPath(start, end, h, counter)
 
     def getCircuit(self):
         return list(self.findCircuit())[:-1]
